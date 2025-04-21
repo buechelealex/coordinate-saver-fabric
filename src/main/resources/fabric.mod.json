@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "test",
+  "version": "${version}",
+  "name": "Test",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/test/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.pommes2864.test.test.client.TestDataGenerator"
+    ],
+    "main": [
+      "org.pommes2864.test.test.Test"
+    ]
+  },
+  "mixins": [
+    "test.mixins.json",
+    {
+      "config": "test.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
