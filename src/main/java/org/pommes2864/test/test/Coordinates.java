@@ -38,7 +38,7 @@ public class Coordinates {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
 
-        String template = "%-10s %-10s %-10s %-10s";
+        String template = "| %-15s | %-6s | %-6s | %-6s |";
         formatter.format(template, getName(), getXcoord(), getYcoord(), getZcoord());
 
         return stringBuilder.toString();

@@ -1,5 +1,6 @@
 package org.pommes2864.test.test;
 
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -27,7 +28,42 @@ public class Test implements ModInitializer {
 
         AddToCoordinates("test", 5, 5, 5);
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("listcoords")
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("coord")
+                .then(literal("list")
+                        .executes(Test::ReturnAllCoordinates))
+
+                .then(literal("add")
+                        .then(argument("name", StringArgumentType.string())
+                                .executes(Test::AddCoordinatesOfPlayerToArrayList)
+
+
+                                .then(argument("posx", IntegerArgumentType.integer())
+                                        .then(argument("posy", IntegerArgumentType.integer())
+                                                .then(argument("posz", IntegerArgumentType.integer())
+                                                        .executes(Test::AddCustomCoordinatesToArrayList)
+                                                )
+                                        )
+                                )
+
+                        )
+                )
+                .then(literal("delete")
+                .then(argument("name", StringArgumentType.string())
+                        .executes(context -> {
+                            final String name = StringArgumentType.getString(context, "name");
+
+                            if (DeleteArrayListEntry(name)){
+                                context.getSource().sendFeedback(() -> Text.literal("Punkt " + name + " wurde gelöscht."), false);
+                            }
+                            else {
+                                context.getSource().sendFeedback(() -> Text.literal("Punkt " + name + " wurde nicht gefunden."), false);
+                            }
+                            return 1;
+
+                        }
+        )))));
+
+        /*CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("listcoords")
                         .executes(Test::ReturnAllCoordinates)));
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("addcoord")
@@ -57,7 +93,7 @@ public class Test implements ModInitializer {
                                     }
                                     return 1;
 
-                                }))));
+                                }))));*/
 
     }
 
@@ -85,7 +121,7 @@ public class Test implements ModInitializer {
         final int posz = IntegerArgumentType.getInteger(context, "posz");
 
         for (Coordinates arrayListCoord : ArrayListCoords) {
-            if (arrayListCoord.getName() != null && arrayListCoord.getName().contains(name)) {
+            if (arrayListCoord.getName() != null && arrayListCoord.getName().equals(name)) {
                 ifexist = true;
                 break;
             }
@@ -115,7 +151,7 @@ public class Test implements ModInitializer {
         final String name = StringArgumentType.getString(context, "name");
 
         for (Coordinates arrayListCoord : ArrayListCoords) {
-            if (arrayListCoord.getName() != null && arrayListCoord.getName().contains(name)) {
+            if (arrayListCoord.getName() != null && arrayListCoord.getName().equals(name)) {
                 ifexist = true;
                 break;
             }
@@ -141,7 +177,7 @@ public class Test implements ModInitializer {
 
         boolean ifdel = false;
         for (int i = 0; i < ArrayListCoords.size(); i++) {
-            if (ArrayListCoords.get(i).getName() != null && ArrayListCoords.get(i).getName().contains(filterArg)) {
+            if (ArrayListCoords.get(i).getName() != null && ArrayListCoords.get(i).getName().equals(filterArg)) {
                 ArrayListCoords.remove(ArrayListCoords.get(i));
                 ifdel = true;
             }
@@ -150,5 +186,7 @@ public class Test implements ModInitializer {
         return ifdel;
 
         }
+
+
 }
 
