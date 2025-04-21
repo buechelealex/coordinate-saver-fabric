@@ -84,9 +84,10 @@ public class Test implements ModInitializer {
         final int posy = IntegerArgumentType.getInteger(context, "posy");
         final int posz = IntegerArgumentType.getInteger(context, "posz");
 
-        for (int i = 0; i < ArrayListCoords.size(); i++) {
-            if (ArrayListCoords.get(i).getName() != null && ArrayListCoords.get(i).getName().contains(name)) {
+        for (Coordinates arrayListCoord : ArrayListCoords) {
+            if (arrayListCoord.getName() != null && arrayListCoord.getName().contains(name)) {
                 ifexist = true;
+                break;
             }
 
         }
@@ -113,9 +114,10 @@ public class Test implements ModInitializer {
 
         final String name = StringArgumentType.getString(context, "name");
 
-        for (int i = 0; i < ArrayListCoords.size(); i++) {
-            if (ArrayListCoords.get(i).getName() != null && ArrayListCoords.get(i).getName().contains(name)) {
+        for (Coordinates arrayListCoord : ArrayListCoords) {
+            if (arrayListCoord.getName() != null && arrayListCoord.getName().contains(name)) {
                 ifexist = true;
+                break;
             }
 
         }
