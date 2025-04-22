@@ -14,7 +14,7 @@
       "org.pommes2864.test.test.client.TestDataGenerator"
     ],
     "main": [
-      "org.pommes2864.test.test.Test"
+      "org.pommes2864.coordinatesaver.main.MainFunctionality"
     ]
   },
   "mixins": [

@@ -1,4 +1,4 @@
-package org.pommes2864.test.test;
+package org.pommes2864.coordinatesaver.main;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import static net.minecraft.server.command.CommandManager.*;
 
-public class Test implements ModInitializer {
+public class MainFunctionality implements ModInitializer {
 
 
     public static final String MOD_ID = "TestModPommes";
@@ -44,17 +44,17 @@ public class Test implements ModInitializer {
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("coord")
                 .then(literal("list")
-                        .executes(Test::ReturnAllCoordinates))
+                        .executes(MainFunctionality::ReturnAllCoordinates))
 
                 .then(literal("add")
                         .then(argument("name", StringArgumentType.string())
-                                .executes(Test::AddCoordinatesOfPlayerToArrayList)
+                                .executes(MainFunctionality::AddCoordinatesOfPlayerToArrayList)
 
 
                                 .then(argument("posx", IntegerArgumentType.integer())
                                         .then(argument("posy", IntegerArgumentType.integer())
                                                 .then(argument("posz", IntegerArgumentType.integer())
-                                                        .executes(Test::AddCustomCoordinatesToArrayList)
+                                                        .executes(MainFunctionality::AddCustomCoordinatesToArrayList)
                                                 )
                                         )
                                 )

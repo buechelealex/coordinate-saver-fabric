@@ -1,4 +1,4 @@
-package org.pommes2864.test.test;
+package org.pommes2864.coordinatesaver.main;
 
 
 import java.io.FileWriter;

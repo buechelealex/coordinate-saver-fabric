@@ -1,4 +1,4 @@
-package org.pommes2864.test.test.client;
+package org.pommes2864.coordinatesaver.main.client;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
