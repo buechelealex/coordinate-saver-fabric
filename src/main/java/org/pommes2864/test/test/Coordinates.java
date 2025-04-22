@@ -1,5 +1,8 @@
 package org.pommes2864.test.test;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Formatter;
 
 public class Coordinates {
@@ -38,7 +41,7 @@ public class Coordinates {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
 
-        String template = "| %-15s | %-6s | %-6s | %-6s |";
+        String template = "§6| %-15s| %6s | %6s | %6s |";
         formatter.format(template, getName(), getXcoord(), getYcoord(), getZcoord());
 
         return stringBuilder.toString();
@@ -46,4 +49,6 @@ public class Coordinates {
         // return Name + " " + Xcoord + " " + Ycoord + " " + Zcoord;
 
     }
+
+
 }
